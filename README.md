@@ -24,15 +24,18 @@ This repo is my daily log. Each folder is one Arduino sketch (open the `.ino` fi
 | 5 | for and while loops, break, polling a button | [day05-count-up](day05-count-up), [day05-countdown](day05-countdown), [day05-even-numbers](day05-even-numbers), [day05-sum-1-to-100](day05-sum-1-to-100), [day05-resistor-sweep](day05-resistor-sweep), [day05-while-doubling](day05-while-doubling), [day05-battery-hours](day05-battery-hours), [day05-break-infinite-loop](day05-break-infinite-loop), [day05-wait-for-button](day05-wait-for-button) |
 | 6 | Reading user input over Serial; Ohm's law calculator; choosing LED resistors | [day06-serial-blink-count](day06-serial-blink-count), [day06-ohms-law-calculator](day06-ohms-law-calculator), [day06-rgb-led-sequence](day06-rgb-led-sequence) |
 | 7 | Review week 1; button edge detection and debounce | [day07-rgb-color-cycler](day07-rgb-color-cycler) |
+| 8 | Functions: parameters, return values, guard clauses, input validation; electrical calculators (power, LED resistor, % error) | [day08-functions](day08-functions) |
+| 8 | Arrays: LED pins in an array, LED modes with a button | [day08-arrays](day08-arrays) |
 
 ## Side projects
 
 - [Ultrasonic distance LEDs](projects/ultrasonic-distance-leds): HC-SR04 sensor turns a red LED on when something is within 10 cm.
 - [Ultrasonic distance bar](projects/ultrasonic-distance-bar): a button switches it on/off; blue, green and red LEDs light up like a parking sensor as something gets closer.
+- [OLED distance display](projects/oled-distance-display): HC-SR04 + SSD1306 OLED.
 
 ## Hardware I use
 
-Arduino UNO, breadboard, red/green/blue 5 mm LEDs, resistors (E12), 10k potentiometer, tactile push button, HC-SR04 ultrasonic sensor. ESP32 and a multimeter are on the way.
+Arduino UNO, breadboard, red/green/blue 5 mm LEDs, resistors (E12), 10k potentiometer, tactile push button, HC-SR04 ultrasonic sensor, SSD1306 OLED, UNI-T UT890D+ multimeter, ESP32 DevKit.
 
 ## Things I learned the hard way
 
