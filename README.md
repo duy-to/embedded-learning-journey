@@ -26,6 +26,8 @@ This repo is my daily log. Each folder is one Arduino sketch (open the `.ino` fi
 | 7 | Review week 1; button edge detection and debounce | [day07-rgb-color-cycler](day07-rgb-color-cycler) |
 | 8 | Functions: parameters, return values, guard clauses, input validation; electrical calculators (power, LED resistor, % error) | [day08-functions](day08-functions) |
 | 8 | Arrays: LED pins in an array, LED modes with a button | [day08-arrays](day08-arrays) |
+| 9 | Button edge detection + debounce on ESP32 (one LED at a time with a button) | [day09-button](day09-button) |
+| 9 | Arrays: average, highest and lowest of 7 temperatures (handles ties and all-negative input) | [day09-temperature](day09-temperature) |
 
 ## Side projects
 
