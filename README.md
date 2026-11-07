@@ -28,12 +28,14 @@ This repo is my daily log. Each folder is one Arduino sketch (open the `.ino` fi
 | 8 | Arrays: LED pins in an array, LED modes with a button | [day08-arrays](day08-arrays) |
 | 9 | Button edge detection + debounce on ESP32 (one LED at a time with a button) | [day09-button](day09-button) |
 | 9 | Arrays: average, highest and lowest of 7 temperatures (handles ties and all-negative input) | [day09-temperature](day09-temperature) |
+| 10 | ESP32: setup() vs loop(), global vs local variables, double blink, doing something exactly N times with a bool flag | [day10-loop-counter](day10-loop-counter), [day10-double-blink](day10-double-blink), [day10-blink-5-times-setup](day10-blink-5-times-setup), [day10-blink-5-times-loop](day10-blink-5-times-loop) |
 
 ## Side projects
 
 - [Ultrasonic distance LEDs](projects/ultrasonic-distance-leds): HC-SR04 sensor turns a red LED on when something is within 10 cm.
 - [Ultrasonic distance bar](projects/ultrasonic-distance-bar): a button switches it on/off; blue, green and red LEDs light up like a parking sensor as something gets closer.
 - [OLED distance display](projects/oled-distance-display): HC-SR04 + SSD1306 OLED.
+- [ESP32 parking sensor](projects/esp32-parking-sensor): ESP32 + HC-SR04 (Echo through a 5V to 3.3V voltage divider) + 3 LEDs + OLED, ON/OFF button, 5-sample moving average that skips failed readings.
 
 ## Hardware I use
 
@@ -46,3 +48,5 @@ Arduino UNO, breadboard, red/green/blue 5 mm LEDs, resistors (E12), 10k potentio
 - A button needs **edge detection** (act only when it changes from released to pressed) and a short **debounce** delay.
 - A floating input pin reads random values; use `INPUT_PULLUP`.
 - LED brightness is not proportional to current; your eyes are a bad meter.
+- A variable declared inside `loop()` is created again every pass, so it can't count. Counters live outside.
+- A function and a variable can't share the same name.
