@@ -30,6 +30,7 @@ This repo is my daily log. Each `dayNN` folder holds that day's sketches, one fo
 | 9 | Arrays: average, highest and lowest of 7 temperatures (handles ties and all-negative input) | [temperature](day09/temperature) |
 | 10 | ESP32: setup() vs loop(), global vs local variables, double blink, doing something exactly N times with a bool flag | [loop-counter](day10/loop-counter), [double-blink](day10/double-blink), [blink-5-times-setup](day10/blink-5-times-setup), [blink-5-times-loop](day10/blink-5-times-loop) |
 | 11 | millis(): timing without delay(), LEDs blinking at different rates with arrays, a button that never misses a press (delay vs millis, debounce with millis) | [print-time](day11/print-time), [blink-one-led](day11/blink-one-led), [blink-led-array](day11/blink-led-array), [button-delay](day11/button-delay), [button-millis](day11/button-millis) |
+| 12 | ESP32 ADC with analogRead(): potentiometer to percent, LED bar graph, averaging 10 readings, printing only on a 2% change, knob controls blink speed | [led-bar](day12/led-bar), [smooth-blink](day12/smooth-blink) |
 
 ## Side projects
 
@@ -54,3 +55,5 @@ Arduino UNO, breadboard, red/green/blue 5 mm LEDs, resistors (E12), 10k potentio
 - Looping over an array of N items is `i = 0; i < N`. With `<=` the loop reads one slot past the end and gets garbage, with no error.
 - `delay()` makes the whole board deaf: a button pressed during a 1.3 s blink is simply missed. `millis()` timing (`now - last >= interval`) never waits.
 - Code statements can't sit outside a function, and a `const` can't be changed later, so timestamps are never `const`.
+- The ESP32 ADC is 12-bit (0–4095) but not linear: it reads nothing below about 0.14 V and saturates near 3.13 V. `analogReadMilliVolts()` is calibrated and within ~1% in the middle. Use ADC1 pins (32–39); ADC2 stops working when Wi-Fi is on.
+- A float is almost never exactly equal to a number, so compare with `>=`, not `==`.
