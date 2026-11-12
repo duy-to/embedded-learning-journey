@@ -32,6 +32,7 @@ This repo is my daily log. Each `dayNN` folder holds that day's sketches, one fo
 | 11 | millis(): timing without delay(), LEDs blinking at different rates with arrays, a button that never misses a press (delay vs millis, debounce with millis) | [print-time](day11/print-time), [blink-one-led](day11/blink-one-led), [blink-led-array](day11/blink-led-array), [button-delay](day11/button-delay), [button-millis](day11/button-millis) |
 | 12 | ESP32 ADC with analogRead(): potentiometer to percent, LED bar graph, averaging 10 readings, printing only on a 2% change, knob controls blink speed | [led-bar](day12/led-bar), [smooth-blink](day12/smooth-blink) |
 | 13 | PWM with analogWrite(): 5 brightness levels, a breathing LED with millis, a knob that dims an LED (constrain), and a 3-LED bar that fades in section by section, gamma correction (squaring) so brightness looks even to the eye | [brightness-levels](day13/brightness-levels), [breathing-led](day13/breathing-led), [pot-brightness](day13/pot-brightness), [fading-led-bar](day13/fading-led-bar), [gamma-brightness](day13/gamma-brightness) |
+| 14 | Bits and hex: printing numbers in BIN/HEX, a 4-LED binary counter (bitRead and count & (1 << i)), a 4-LED fading bar using >> 2 instead of percent, one byte holding 4 LED states toggled with XOR and a debounced button (millis), and a bit-shift LED chaser | [number-formats](day14/number-formats), [binary-counter](day14/binary-counter), [shift-brightness-bar](day14/shift-brightness-bar), [led-mask](day14/led-mask), [bit-chaser](day14/bit-chaser) |
 
 ## Side projects
 
@@ -59,3 +60,4 @@ Arduino UNO, breadboard, red/green/blue 5 mm LEDs, resistors (E12), 10k potentio
 - The ESP32 ADC is 12-bit (0–4095) but not linear: it reads nothing below about 0.14 V and saturates near 3.13 V. `analogReadMilliVolts()` is calibrated and within ~1% in the middle. Use ADC1 pins (32–39); ADC2 stops working when Wi-Fi is on.
 - A float is almost never exactly equal to a number, so compare with `>=`, not `==`.
 - `constrain(x, low, high)` and `a - b` give back a new value; written alone on a line, the result is thrown away. Write `x = constrain(x, low, high);`.
+- `x >> n` divides by 2^n and `x << n` multiplies, on whole numbers only (no `float`). `1 << i` is a mask with one bit set; `&` reads that bit, `^` flips it. A number starting with 0 is octal in C: write binary as `0b0101`.
