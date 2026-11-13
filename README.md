@@ -33,6 +33,7 @@ This repo is my daily log. Each `dayNN` folder holds that day's sketches, one fo
 | 12 | ESP32 ADC with analogRead(): potentiometer to percent, LED bar graph, averaging 10 readings, printing only on a 2% change, knob controls blink speed | [led-bar](day12/led-bar), [smooth-blink](day12/smooth-blink) |
 | 13 | PWM with analogWrite(): 5 brightness levels, a breathing LED with millis, a knob that dims an LED (constrain), and a 3-LED bar that fades in section by section, gamma correction (squaring) so brightness looks even to the eye | [brightness-levels](day13/brightness-levels), [breathing-led](day13/breathing-led), [pot-brightness](day13/pot-brightness), [fading-led-bar](day13/fading-led-bar), [gamma-brightness](day13/gamma-brightness) |
 | 14 | Bits and hex: printing numbers in BIN/HEX, a 4-LED binary counter (bitRead and count & (1 << i)), a 4-LED fading bar using >> 2 instead of percent, one byte holding 4 LED states toggled with XOR and a debounced button (millis), and a bit-shift LED chaser | [number-formats](day14/number-formats), [binary-counter](day14/binary-counter), [shift-brightness-bar](day14/shift-brightness-bar), [led-mask](day14/led-mask), [bit-chaser](day14/bit-chaser) |
+| 17–18 | Pointers: printing variable addresses (& and *), addresses inside an array 4 bytes apart and the garbage one slot past the end, swapping two variables through pointers vs. by copy, and a readKnob() function that "returns" two values (raw ADC and brightness) through pointers | [pointer-basics](day17/pointer-basics), [array-addresses](day17/array-addresses), [swap-values](day17/swap-values), [read-knob](day17/read-knob) |
 
 ## Side projects
 
@@ -54,6 +55,7 @@ Arduino UNO, breadboard, red/green/blue 5 mm LEDs, resistors (E12), 10k potentio
 - LED brightness is not proportional to current; your eyes are a bad meter.
 - A variable declared inside `loop()` is created again every pass, so it can't count. Counters live outside.
 - A function and a variable can't share the same name.
+- A pointer holds an address, not a value: `p` is the address, `*p` is what lives there. A function given a copy (`int x`) can never change the caller's variable; given the address (`int* x`, called with `&value`) it can, which is how one function hands back two results.
 - Looping over an array of N items is `i = 0; i < N`. With `<=` the loop reads one slot past the end and gets garbage, with no error.
 - `delay()` makes the whole board deaf: a button pressed during a 1.3 s blink is simply missed. `millis()` timing (`now - last >= interval`) never waits.
 - Code statements can't sit outside a function, and a `const` can't be changed later, so timestamps are never `const`.
