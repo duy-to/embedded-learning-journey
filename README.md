@@ -33,6 +33,7 @@ This repo is my daily log. Each `dayNN` folder holds that day's sketches, one fo
 | 12 | ESP32 ADC with analogRead(): potentiometer to percent, LED bar graph, averaging 10 readings, printing only on a 2% change, knob controls blink speed | [led-bar](day12/led-bar), [smooth-blink](day12/smooth-blink) |
 | 13 | PWM with analogWrite(): 5 brightness levels, a breathing LED with millis, a knob that dims an LED (constrain), and a 3-LED bar that fades in section by section, gamma correction (squaring) so brightness looks even to the eye | [brightness-levels](day13/brightness-levels), [breathing-led](day13/breathing-led), [pot-brightness](day13/pot-brightness), [fading-led-bar](day13/fading-led-bar), [gamma-brightness](day13/gamma-brightness) |
 | 14 | Bits and hex: printing numbers in BIN/HEX, a 4-LED binary counter (bitRead and count & (1 << i)), a 4-LED fading bar using >> 2 instead of percent, one byte holding 4 LED states toggled with XOR and a debounced button (millis), and a bit-shift LED chaser | [number-formats](day14/number-formats), [binary-counter](day14/binary-counter), [shift-brightness-bar](day14/shift-brightness-bar), [led-mask](day14/led-mask), [bit-chaser](day14/bit-chaser) |
+| 15 | Project: traffic light state machine with millis (no delay), debounced pedestrian button that ends green early, potentiometer sets green time 3–10 s, 7-segment countdown using one byte per digit (lookup table + bitRead), first KiCad schematic | [traffic-light](projects/traffic-light) |
 | 17–18 | Pointers: printing variable addresses (& and *), addresses inside an array 4 bytes apart and the garbage one slot past the end, swapping two variables through pointers vs. by copy, and a readKnob() function that "returns" two values (raw ADC and brightness) through pointers | [pointer-basics](day17/pointer-basics), [array-addresses](day17/array-addresses), [swap-values](day17/swap-values), [read-knob](day17/read-knob) |
 
 ## Side projects
@@ -42,9 +43,11 @@ This repo is my daily log. Each `dayNN` folder holds that day's sketches, one fo
 - [OLED distance display](projects/oled-distance-display): HC-SR04 + SSD1306 OLED.
 - [ESP32 parking sensor](projects/esp32-parking-sensor): ESP32 + HC-SR04 (Echo through a 5V to 3.3V voltage divider) + 3 LEDs + OLED, ON/OFF button, 5-sample moving average that skips failed readings.
 
+- [Traffic light](projects/traffic-light): ESP32 traffic light with a pedestrian button, a pot that sets the green time and a 7-segment countdown. Schematic drawn in KiCad ([PDF](projects/traffic-light/hardware/traffic-light-schematic.pdf)).
+
 ## Hardware I use
 
-Arduino UNO, breadboard, red/green/blue 5 mm LEDs, resistors (E12), 10k potentiometer, tactile push button, HC-SR04 ultrasonic sensor, SSD1306 OLED, UNI-T UT890D+ multimeter, ESP32 DevKit.
+Arduino UNO, breadboard, red/green/blue 5 mm LEDs, resistors (E12), 10k potentiometer, tactile push button, HC-SR04 ultrasonic sensor, SSD1306 OLED, UNI-T UT890D+ multimeter, ESP32 DevKit, 1-digit and 4-digit 7-segment displays (common cathode). Schematics in KiCad.
 
 ## Things I learned the hard way
 
@@ -63,3 +66,5 @@ Arduino UNO, breadboard, red/green/blue 5 mm LEDs, resistors (E12), 10k potentio
 - A float is almost never exactly equal to a number, so compare with `>=`, not `==`.
 - `constrain(x, low, high)` and `a - b` give back a new value; written alone on a line, the result is thrown away. Write `x = constrain(x, low, high);`.
 - `x >> n` divides by 2^n and `x << n` multiplies, on whole numbers only (no `float`). `1 << i` is a mask with one bit set; `&` reads that bit, `^` flips it. A number starting with 0 is octal in C: write binary as `0b0101`.
+- Subtracting `unsigned long` values never goes negative: `2000 - 3000` wraps around to about 4.29 billion. Do the subtraction only when you know the first number is bigger (for example, right after the state change, not before).
+- Multiply before you divide with whole numbers: `raw * 7000 / 4095` is exact, `raw * (7000 / 4095)` is `raw * 1`.
